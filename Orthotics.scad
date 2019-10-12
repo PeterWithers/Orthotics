@@ -25,20 +25,35 @@ module innersole(thickness, taper) {
     }
 }
 
-intersection() {
-    union() {
-        innersole(3,5);
-        // metatarsal domes
-        hull(){
-            translate([-5,120,-2]) sphere(10);
-            translate([0,140,-2]) sphere(10);
-            translate([-15,135,-2]) sphere(10);
+module orthoticFull() {
+    intersection() {
+        union() {
+            innersole(3,5);
+            // metatarsal domes
+            hull(){
+                translate([-5,120,-2]) sphere(10);
+                translate([0,140,-2]) sphere(10);
+                translate([-15,135,-2]) sphere(10);
+            }
+            // arch
+            translate([70,80,0]) cylinder(20,100,20);
+            difference() {
+                // heel flange
+                cylinder(12,28,35);
+                translate([0,10,55]) sphere(62);
+            }
         }
-        // arch
-        translate([70,80,0]) cylinder(20,100,20);
+        // clipping box
+        innersole(30,0);
     }
-    // clipping box
-    innersole(30,0);
 }
+module orthoticHalf() {
+    difference() {
+        rotate([-0.95,-0.3,0]) translate([0,29,0]) orthoticFull();
+        translate([-55,-5,-50]) cube([100,300,50]);
+    }
+}
+translate([-100,29,0])orthoticFull();
+orthoticHalf();
 // calibration cube
 //cube([70*2,70*2,70*2]);
