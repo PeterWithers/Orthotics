@@ -6,17 +6,17 @@ module innersole(thickness, taper) {
     difference() {
         hull(){
             // heel
-            cylinder(thickness,28,33);
+            cylinder(thickness,28,28+(taper*thickness));
             // toe
-            translate([0,230,0]) cylinder(thickness,28,33);
+            translate([0,230,0]) cylinder(thickness,28,28+(taper*thickness));
             // instep
             intersection(){
-              translate([-8,185,0]) cylinder(thickness,45,50);
+              translate([-8,185,0]) cylinder(thickness,45,45+(taper*thickness));
               translate([0,00,0]) cube([50,250,thickness]);
             }
             // outstep
             intersection(){
-              translate([90,160,0]) cylinder(thickness,140,150);
+              translate([90,160,0]) cylinder(thickness,140,140+(taper*thickness));
               translate([-100,0,0]) cube([100,250,thickness]);
             }
         }
@@ -28,23 +28,26 @@ module innersole(thickness, taper) {
 module orthoticFull() {
     intersection() {
         union() {
-            innersole(3,5);
+            innersole(3,1);
             // metatarsal domes
             hull(){
-                translate([-5,120,-2]) sphere(10);
-                translate([0,140,-2]) sphere(10);
-                translate([-15,135,-2]) sphere(10);
+                translate([-5,125,-10]) sphere(20);
+                translate([-3,145,-10]) sphere(20);
+                translate([-10,143,-10]) sphere(20);
             }
             // arch
             translate([70,80,0]) cylinder(20,100,20);
             difference() {
                 // heel flange
-                cylinder(12,28,35);
-                translate([0,10,55]) sphere(62);
+                cylinder(12,30,35);
+                translate([0,10,56]) sphere(62);
             }
         }
         // clipping box
-        innersole(30,0);
+        intersection() {
+        innersole(30,1);
+        translate([0,0,-10]) innersole(30,0.2);
+        }
     }
 }
 module orthoticHalf() {
