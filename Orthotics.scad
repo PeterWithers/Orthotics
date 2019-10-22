@@ -21,7 +21,7 @@ module innersole(thickness, taper) {
             }
         }
         // arch
-        translate([325,85,-1]) cylinder(30,300,270);
+        translate([325,85,-1]) cylinder(30,310,285);
     }
 }
 
@@ -31,9 +31,9 @@ module orthoticFull() {
             innersole(3,1);
             // metatarsal domes
             hull(){
-                translate([-5,130,-10]) sphere(20);
-                translate([-3,150,-10]) sphere(20);
-                translate([-10,148,-10]) sphere(20);
+                translate([-2,125,-10]) sphere(20);
+                translate([0,145,-10]) sphere(20);
+                translate([-7,143,-10]) sphere(20);
             }
             // arch
             translate([70,80,0]) cylinder(28,100,5);
