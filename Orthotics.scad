@@ -31,12 +31,14 @@ module orthoticFull() {
             innersole(3,1);
             // metatarsal domes
             hull(){
-                translate([-7,122,-10]) sphere(20);
-                translate([-5,142,-10]) sphere(20);
-                translate([-12,140,-10]) sphere(20);
+                translate([-7,122,-13]) sphere(20);
+                translate([-5,142,-13]) sphere(20);
+                translate([-15,139,-13]) sphere(20);
             }
             // arch
-            translate([70,80,0]) cylinder(28,100,5);
+           //#translate([70,80,0]) cylinder(28,100,5);
+           translate([170,50,0]) rotate([0,0,-15]) scale([1,0.5,1])cylinder(58,210,5);
+            //translate([45,80,-164]) sphere(180);
             difference() {
                 // heel flange
                 cylinder(12,30,35);
